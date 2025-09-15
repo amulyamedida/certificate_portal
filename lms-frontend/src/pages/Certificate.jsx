@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import API_BASE_URL from "../config";
 
 function Certificate() {
   const { resultId } = useParams();
   const { token } = useAuth();
 
   const handleDownload = () => {
-    fetch(`http://localhost:5000/api/certificate/${resultId}`, {
+    fetch(`${API_BASE_URL}/api/certificate/${resultId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((res) => res.blob())

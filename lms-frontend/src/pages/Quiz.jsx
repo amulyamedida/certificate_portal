@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 function Quiz() {
   const [questions, setQuestions] = useState([]);
@@ -12,7 +13,7 @@ function Quiz() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/quiz/quiz1", {
+      .get(`${API_BASE_URL}/api/quiz/quiz1`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -37,7 +38,7 @@ function Quiz() {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/quiz/submit",
+        `${API_BASE_URL}/api/quiz/submit`,
         { userId: user.id, quizId: "quiz1", answers },
         { headers: { Authorization: `Bearer ${token}` } }
       );
